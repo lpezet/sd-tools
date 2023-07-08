@@ -13,8 +13,9 @@ It uses `jq` to parse JSON responses from CivitAI API.
 # Usage
 
 ```bash
-git clone https://github.com/lpezet/civitai-downloader.git .
-civitai-downloader.sh model_version [output folder]
+git clone https://github.com/lpezet/sd-tools.git
+cd sd-tools
+./civitai-downloader.sh model_version [output folder]
 ```
 
 You can use the config to automatically store the output to a specific folder.
