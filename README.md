@@ -34,7 +34,7 @@ would download the LORA file and place it in `/workspace/stable-diffusion-webui/
 
 ## Within RunPod
 
-The following `.config` file would be useful when running in `runpod.io`:
+The following `.config` file is useful when running in `runpod.io`:
 ```
 CONFIG_MODE=1
 # Config for SD on RunPod
@@ -55,7 +55,7 @@ Then do:
 ```bash
 git clone https://github.com/lpezet/sd-tools.git
 cd sd-tools
-ln -s /workspace/sd-tools/civit-downloader.sh /usr/local/bin/civit-downloader
+ln -s `pwd`/civitai-downloader.sh /usr/local/bin/civitai-downloader
 ```
 
 Now, from anywhere you can call `civit-downloader` and pass it a `model version` and it will download and place the model to its right place.

@@ -2,6 +2,15 @@
 modelVersion=$1
 outputFolder=$2
 
+prerequisites() {
+  local TEST=`(which jq > /dev/null) && echo "Present" || echo "Missing"`
+  if [ "$TEST" == "Missing" ]; then
+    echo "Program 'jq' missing. Please install it first (like 'apt install jq')."
+    exit 1
+  fi
+}
+prerequisites
+
 help() {
   echo -e "Usage:\n"
   echo -e "$0 model_version [output_folder]\n"
