@@ -6,9 +6,9 @@ help() {
   echo -e "Usage:\n"
   echo -e "$0 model_version [output_folder]\n"
   echo -e "with\n"
-  echo -e "\tmodel_version  # The version of the model you want to download.\n"
-  echo -e "\toutput_folder  # If provided, download model into that folder.\n"
-  echo -e "\n\nIf .config file provided, ...TODO..."
+  echo -e " model_version\t# The version of the model you want to download.\n"
+  echo -e " output_folder\t# If provided, download model into that folder.\n"
+  echo -e "\n\nIf .config file provided, folder configuration will be loaded from it."
   exit 1
 }
 
@@ -16,8 +16,18 @@ if [ -z "$modelVersion" ]; then
   help
 fi
 
-SCRIPT_DIR=$(dirname "$0")
+resolve_script_dir() {
+  local SOURCE=${BASH_SOURCE[0]}
+  local DIR=""
+  while [ -L "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+    SOURCE=$(readlink "$SOURCE")
+    [[ $SOURCE != /* ]] && SOURCE=$DIR/$SOURCE # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+  done
+  SCRIPT_DIR=$( cd -P "$( dirname "$SOURCE" )" >/dev/null 2>&1 && pwd )
+}
 
+resolve_script_dir
 if [ -f ${SCRIPT_DIR}/.config ]; then
   . ${SCRIPT_DIR}/.config
 fi
