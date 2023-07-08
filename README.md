@@ -25,6 +25,15 @@ The following model types are supported rigth now:
 - LORA
 - TextualInversion
 
+Running the following to download the amazing "Zaha Hadid architecture" LORA (model version 37555)
+```
+./civitai-downloader.sh 37555
+```
+would download the LORA file and place it in `/workspace/stable-diffusion-webui/models/Lora` folder.
+
+
+## Within RunPod
+
 The following `.config` file would be useful when running in `runpod.io`:
 ```
 CONFIG_MODE=1
@@ -38,8 +47,21 @@ OUTPUT_DIR_EMBEDDINGS=${OUTPUT_BASE_DIR}/embeddings
 #OUTPUT_DIR_ESRGAN=${OUTPUT_DIR_BASE_MODELS}/ESRGAN
 ```
 
-Running the following to download the amazing "Zaha Hadid architecture" LORA (model version 37555)
+This is exactly what `.config.sample.runpod.sd` has so we'll just use it was is.
+
+Once you're Pod is running, connect using Web Terminal.
+Then do:
+
+```bash
+git clone https://github.com/lpezet/sd-tools.git
+cd sd-tools
+ln -s /workspace/sd-tools/civit-downloader.sh /usr/local/bin/civit-downloader
 ```
-./civitai-downloader.sh 37555
+
+Now, from anywhere you can call `civit-downloader` and pass it a `model version` and it will download and place the model to its right place.
+If you need to download a model to a specific directoy, you can always add it at the end of the command like so:
+```bash
+civit-downloader 37555 /tmp/
 ```
-would download the LORA file and place it in `/workspace/stable-diffusion-webui/models/Lora` folder.
+
+

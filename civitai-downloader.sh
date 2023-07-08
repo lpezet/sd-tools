@@ -16,8 +16,10 @@ if [ -z "$modelVersion" ]; then
   help
 fi
 
-if [ -f .config ]; then
-  . .config
+SCRIPT_DIR=$(dirname "$0")
+
+if [ -f ${SCRIPT_DIR}/.config ]; then
+  . ${SCRIPT_DIR}/.config
 fi
 
 if [ -z "$outputFolder" -a -z "$CONFIG_MODE" ]; then
