@@ -94,5 +94,8 @@ if [ -z "$outputFolder" ]; then
   outputFolder="./"
 fi
 
-wget -P "${outputFolder}" "${DOWNLOAD_URL}" --content-disposition
+
+COMMAND="wget -P \"${outputFolder}\" \"${DOWNLOAD_URL}\" --content-disposition"
+echo "$COMMAND" >> /tmp/sd-tools.civitai-downloader.replay
+$COMMAND
 
