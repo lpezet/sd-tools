@@ -106,7 +106,7 @@ download() {
   if [ $DRYRUN -eq 0 ]; then
     echo "# Downloading model version [${modelVersion}] (${MODEL_TYPE})..."
     echo "$modelVersion" >> /tmp/sd-tools.civitai-downloader.replay
-    echo wget -P "${outputFolder}" "${DOWNLOAD_URL}" --content-disposition
+    wget -P "${outputFolder}" "${DOWNLOAD_URL}" --content-disposition
   else
     echo "# In DRY RUN mode. Not downloading model version [${modelVersion}] (${MODEL_TYPE})."
   fi

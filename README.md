@@ -56,6 +56,7 @@ Then do:
 git clone https://github.com/lpezet/sd-tools.git
 cd sd-tools
 ln -s `pwd`/civitai-downloader.sh /usr/local/bin/civitai-downloader
+cp .config.sample.runpod.sd .config
 ```
 
 Now, from anywhere you can call `civit-downloader` and pass it a `model version` and it will download and place the model to its right place.
