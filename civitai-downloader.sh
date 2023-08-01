@@ -14,13 +14,14 @@ prerequisites() {
 prerequisites
 
 help() {
-  echo -e "Usage:\n"
-  echo -e "$0 [model_version | filename] [output_folder]\n"
-  echo -e "with\n"
-  echo -e " model_version\t# The version of the model you want to download.\n"
-  echo -e " filename\t# Path to a file containing model version ids on each line. Lines starting with # will be ignored.\n"
-  echo -e " output_folder\t# If provided, download model into that folder.\n"
-  echo -e "\n\nIf .config file provided, folder configuration will be loaded from it."
+  echo -e "Usage:"
+  echo -e "$0 [model_version | cititai_download_url | filename] [output_folder]"
+  echo -e "\nwith"
+  echo -e " model_version\t\t# The version of the model you want to download."
+  echo -e ' cititai_download_url\t# The civitai download url (right click on "Download" button).'
+  echo -e " filename\t\t# Path to a file containing model version ids on each line. Lines starting with # will be ignored."
+  echo -e " output_folder\t\t# If provided, download model into that folder."
+  echo -e "\nIf .config file provided, folder configuration will be loaded from it. See .config.sample or .config.sample.runpod.sd for examples."
   exit 1
 }
 
@@ -52,6 +53,13 @@ fi
 
 describe_model() {
   local ver=$1
+  regex='^https://civitai.com/.*'
+  if [[ $ver =~ $regex ]]; then
+	  echo "url!"
+	  id=$(echo "$ver" | sed 's@.*/models/\([0-9]\+\)@\1@g')
+	  echo "Using civitai download url: id=[$id]"
+    ver=$id
+  fi
   [[ $DEBUG -ne 0 ]] && echo "# Getting model info for model version ${ver}..."
   curl -s -o /tmp/civitai_res.json "https://civitai.com/api/v1/model-versions/${ver}"
   if [ $? -eq 1 ]; then

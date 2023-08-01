@@ -4,6 +4,18 @@ Repo with tools to help working with Stable Diffusion.
 
 First tool is `civitai-downloader.sh`, a bash script to help download CivitAI models (Lora, Embeddings, Models, etc.).
 It can automatically organize content when used for Stable Diffusion.
+For example:
+
+```
+# Download DreamShaper model and put it automatically in models/Stable-diffusion folder
+civitai-downloader https://civitai.com/api/download/models/128713
+# Download using only model version id
+civitai-downloader 128713
+# Download to specific folder
+civitai-downloader 128713 /tmp/
+# Download models listed in file models.txt
+civitai-downloader models.txt
+```
 
 # Prerequisites
 
